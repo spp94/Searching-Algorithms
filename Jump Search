@@ -1,0 +1,40 @@
+-- Jump Search
+An improvement in Linear Search, where we divide the array into blocks and do the linear search in a block only.
+Array has to be sorted
+blockSize = sqrt(n)
+
+
+
+
+import java.util.*;
+public class Linear {
+	public int jumpSearch(int[] arr, int target){
+		int blockSize = (int) Math.sqrt(arr.length);
+		int beginBlock = 0, endblock = blockSize;
+		while(beginBlock < arr.length && arr[endblock-1] < target){
+			beginBlock += blockSize;
+			endblock += endblock;
+			if(endblock > arr.length){
+				endblock = arr.length;
+			}
+		}
+		for(int i = beginBlock; i < endblock; i++){
+			if(target == arr[i]){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public static void main(String...args){
+		int[] arr = {1,2,3,4,5,6,7,8};
+		Linear linear = new Linear();
+		System.out.println(linear.jumpSearch(arr, 0));
+ 	}
+}
+
+
+
+
+
+Time Complexity : sqrt(n)
