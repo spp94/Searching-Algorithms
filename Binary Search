@@ -1,0 +1,58 @@
+-- Binary Search
+It's faster than Linear Search but Array needs to be sorted
+
+
+
+
+import java.util.*;
+public class Linear {
+	public int binarySearchRec(int[] arr, int key, int begin, int end){
+		if(begin > end){
+			return -1;
+		}
+		int middle = (begin + end) / 2;
+		if(arr[middle] == key){
+			return middle;
+		}
+		if(arr[middle] > key){
+			return binarySearchRec(arr, key, begin, middle-1);
+		}
+		return binarySearchRec(arr, key, middle+1, end);
+	}
+	public int binarySearchIter(int[] arr, int key, int begin, int end){
+		int middle = 0;
+		while(begin <= end){
+			middle = (begin + end) / 2;
+			if(arr[middle] == key){
+				return middle;
+			}
+			if(key < arr[middle]){
+				end = middle - 1;
+			}
+			else{
+				begin = middle + 1;
+			}
+		}
+		return -1;
+	}
+	public static void main(String...args){
+		int[] arr = {1,2,3,4,5,6,7,8};
+		Linear linear = new Linear();
+		System.out.println(linear.binarySearchRec(arr, 7, 0, arr.length-1));
+		System.out.println(linear.binarySearchIter(arr, 7, 0, arr.length-1));
+ 	}
+}
+
+
+
+
+
+                     Average
+--------------------------------
+   Complexity    |  O(log2(n))  |
+ Space Recursion |  O(log2(n))  | This space is almost negligible
+ Space Iteration |    O(1)      |
+--------------------------------
+
+
+
