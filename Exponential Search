@@ -1,0 +1,49 @@
+-- Exponential Search
+
+
+
+
+import java.util.*;
+public class Linear {
+	public int binarySearch(int[] arr, int key, int begin, int end){
+		if(begin > end){
+			return -1;
+		}
+		int mid = (begin + end) / 2;
+		if(arr[mid] == key){
+			return mid;
+		}
+		if(key > arr[mid]){
+			return binarySearch(arr, key, mid+1, end);
+		}
+		return binarySearch(arr, key, begin, mid-1);
+	}
+	public int exponentialSearch(int[] arr, int key){
+		int boundary = 1;
+		while(boundary < arr.length && key > arr[boundary]){
+			boundary *= 2;
+		}
+		int result = binarySearch(arr, key, boundary/2, Math.min(boundary, arr.length-1));
+		return result;
+	}
+	
+	public static void main(String...args){
+		int[] arr = {1,2,3,4,5,6,7,8};
+		Linear linear = new Linear();
+		System.out.println(linear.exponentialSearch(arr, 1));
+ 	}
+}
+
+
+
+
+
+
+
+Time Complexity : O(log(n))
+
+
+
+
+
+
