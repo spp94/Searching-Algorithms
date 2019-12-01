@@ -1,0 +1,60 @@
+-- Ternary Search
+
+     Binary                             Ternary
+
+    log2(n)                              log3(n)
+  target == mid                       target > mid2
+   target > mid                       target == mid2
+   target < mid                 target < mid2 && target > mid1
+                                      target == mid1     
+                                      target < mid1
+
+The number of comparison in worst case is more in Ternary Search
+   Binary Search is faster than Teranary Search
+
+
+
+
+
+import java.util.*;
+public class Linear {
+	public int ternarySearch(int[] arr, int key, int begin, int end){
+		if(begin > end){
+			return -1;
+		}
+		int middle = (end - begin) / 3;
+		int middle1 = begin + middle;
+		int middle2 = end - middle;
+		if(arr[middle1] == key){
+			return middle1;
+		}
+		if(arr[middle2] == key){
+			return middle2;
+		}
+		if(key > arr[middle1] && arr[middle2] > key){
+			return ternarySearch(arr, key, middle1+1, middle2-1);
+		}
+		if(key > arr[middle2]){
+			return ternarySearch(arr, key, middle2+1, end);
+		}
+		return ternarySearch(arr, key, begin, middle1-1);
+	}
+	
+	public static void main(String...args){
+		int[] arr = {1,2,3,4,5,6,7,8};
+		Linear linear = new Linear();
+		System.out.println(linear.ternarySearch(arr, 97, 0, arr.length-1));
+ 	}
+}
+
+
+
+
+
+                     Average
+--------------------------------
+   Complexity    |  O(log3(n))  |
+ Space Recursion |  O(log3(n))  | This space is almost negligible
+ Space Iteration |    O(1)      |
+--------------------------------
+
